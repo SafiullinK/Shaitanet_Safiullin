@@ -14,7 +14,7 @@ namespace Shaitanet_Safiullin
     /// </summary>
     public partial class App : Application
     {
-        public static Shaitanet_Entities db = new Shaitanet_Entities();
+        public static Shaitanet_Entities1 db = new Shaitanet_Entities1();
         public static User currentUser;
 
 

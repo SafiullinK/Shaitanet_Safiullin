@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Shaitanet_SafiullinKarimModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Shaitanet_SafiullinKarimModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Balans">
           <Key>
             <PropertyRef Name="Id_Balans" />
@@ -38,8 +38,9 @@
           <Property Name="Id_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Date_Redact" Type="datetime" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="150" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
           <Property Name="Info_Product" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -184,7 +185,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Shaitanet_SafiullinKarimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -227,8 +229,9 @@
           <Property Name="Id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date_Redact" Type="DateTime" Precision="3" />
-          <Property Name="Photo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Info_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Product" FromRole="Product" ToRole="Order" />
         </EntityType>
         <EntityType Name="Role">
@@ -267,11 +270,11 @@
           <Property Name="Id_Role" Type="Int32" />
           <Property Name="Photo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="DateBirthday" Type="DateTime" Precision="0" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Balans" Relationship="Self.FK_Balans_User" FromRole="User" ToRole="Balans" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Balans_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
@@ -345,7 +348,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Shaitanet_Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Shaitanet_Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Balans" EntityType="Self.Balans" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
@@ -384,7 +387,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище Shaitanet_SafiullinKarimModelContainer" CdmEntityContainer="Shaitanet_Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Shaitanet_SafiullinKarimModelContainer" CdmEntityContainer="Shaitanet_Entities1">
           <EntitySetMapping Name="Balans">
             <EntityTypeMapping TypeName="Shaitanet_SafiullinKarimModel.Balans">
               <MappingFragment StoreEntitySet="Balans">
@@ -422,6 +425,7 @@
                 <ScalarProperty Name="Date_Redact" ColumnName="Date_Redact" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Info_Product" ColumnName="Info_Product" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -455,14 +459,14 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Shaitanet_SafiullinKarimModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="DateBirthday" ColumnName="DateBirthday" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

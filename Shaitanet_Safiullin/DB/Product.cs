@@ -24,6 +24,7 @@ namespace Shaitanet_Safiullin.DB
         public Nullable<System.DateTime> Date_Redact { get; set; }
         public string Photo { get; set; }
         public string Info_Product { get; set; }
+        public Nullable<decimal> Cost { get; set; }
     
         public virtual ICollection<Order> Order { get; set; }
     }

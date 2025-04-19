@@ -13,10 +13,10 @@ namespace Shaitanet_Safiullin.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Shaitanet_Entities : DbContext
+    public partial class Shaitanet_Entities1 : DbContext
     {
-        public Shaitanet_Entities()
-            : base("name=Shaitanet_Entities")
+        public Shaitanet_Entities1()
+            : base("name=Shaitanet_Entities1")
         {
         }
     

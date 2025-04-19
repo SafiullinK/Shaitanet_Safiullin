@@ -11,25 +11,47 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel VerticalAlignment="Center">
-                <Button Margin="10" Padding="10 0 10 0" Click="Button_Click">Корма</Button>
                 <Button Margin="10" Padding="10 0 10 0" Click="Button_Click_1">Выход</Button>
             </StackPanel>
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
                 <WrapPanel MaxWidth="1400" Name="ProductsWP"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-            
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ListView  ScrollViewer.VerticalScrollBarVisibility="Hidden" Width="800" Height="300" ItemsSource="{Binding Product}" x:Name="ProductLv" d:ItemsSource="{d:SampleData}" SelectionChanged="ProductLv_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel  Background="Transparent" Orientation="Vertical" Height="150">
+                            <StackPanel Width="230" Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical" Margin="5 0 0 0">
+                                    <StackPanel VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left" Width="250" Height="100">
+                                        <Image Width="100" Height="100" Source="{Binding Photo}"/>
+                                        <TextBlock FontWeight="ExtraBold" Margin="5 0" Text="{Binding Name}" Opacity="0.7"></TextBlock>
+                                        <TextBlock Width="100" Height="80"  TextWrapping="Wrap" Margin="-50 15 0 0" Text="{Binding Info_Product}" Opacity="0.7"></TextBlock>
+                                        <TextBlock Margin="-95 70 0 0" Text="{Binding Cost}"/>
+                                        <TextBlock Margin="-65 70 0 0" Text="Руб."/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         <StackPanel HorizontalAlignment="Right" Margin="10">
             <Button Name="New" Click="New_Click">Новый товар</Button>
-            <Button Name="Sort" Click="Sort_Click">Сортировка по алфавиту</Button>
             <TextBlock>Поиск</TextBlock>
             <TextBox TextChanged="SearchTB_TextChanged" Name="SearchTB" Width="150"></TextBox>
             <Grid>
-                <Button HorizontalAlignment="Left" Name="BackBtn" Height="20" VerticalAlignment="Top" Click="BackBtn_Click">Назад</Button>
                 <TextBlock HorizontalAlignment="Center" Name="CountOnPageTb"></TextBlock>
-                <Button Name="ForwardBtn" Margin="106,0,0,0" Click="ForwardBtn_Click">Вперед</Button>
             </Grid>
         </StackPanel>
     </Grid>
